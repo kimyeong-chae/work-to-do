@@ -183,7 +183,7 @@ router.delete('/:id', (req, res) => {
     READ MEMO: GET /api/memo
 */
 router.get('/', (req, res) => {
-    Memo.find({"ymd":req.query.ymd})
+    Memo.find({"ymd":req.query.ymd, "department": req.session.loginInfo.department})
         .sort({"_id": -1})
         .limit(6)
         .exec((err, memos) => {
@@ -219,7 +219,7 @@ router.get('/:listType/:id', (req, res) => {
 
     if(listType === 'new') {
         // GET NEWER MEMO
-        Memo.find({ _id: { $gt: objId }})
+        Memo.find({ _id: { $gt: objId }, "department": req.session.loginInfo.department})
             .sort({_id: -1})
             .limit(6)
             .exec((err, memos) => {
@@ -228,7 +228,7 @@ router.get('/:listType/:id', (req, res) => {
             });
     } else {
         // GET OLDER MEMO
-        Memo.find({ _id: { $lt: objId }})
+        Memo.find({ _id: { $lt: objId }, "department": req.session.loginInfo.department})
             .sort({_id: -1})
             .limit(6)
             .exec((err, memos) => {

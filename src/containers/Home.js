@@ -52,11 +52,7 @@ class Home extends Component {
             );
         };
 
-        var ymd = this.props.currentDate;
-        console.log('componentDidMount this.props.currentDate == ',this.props.currentDate);
-        console.log('componentDidMount ymd == ',ymd);
-
-        this.props.memoListRequest(true,'','','',ymd).then(
+        this.props.memoListRequest(true,'','','',this.props.currentDate).then(
             () => {
                 console.log(this.props.memoData);
             }
@@ -97,16 +93,12 @@ class Home extends Component {
                 resolve();
             });
 
-        var ymd = this.props.currentDate;
-        console.log('loadNewMemo this.props.currentDate == ',this.props.currentDate);
-        console.log('loadNewMemo ymd == ',ymd);
-
         // IF PAGE IS EMPTY, DO THE INITIAL LOADING
         if(this.props.memoData.length === 0 )
-            return this.props.memoListRequest(true, '','','',ymd);
+            return this.props.memoListRequest(true, null,null,null,this.props.currentDate);
 
 
-        return this.props.memoListRequest(false, 'new', this.props.memoData[0]._id,'', ymd);
+        return this.props.memoListRequest(false, 'new', this.props.memoData[0]._id,'', this.props.currentDate);
     }
 
     loadOldMemo() {
@@ -123,7 +115,7 @@ class Home extends Component {
         let lastId = this.props.memoData[this.props.memoData.length - 1]._id;
 
         // START REQUEST
-        return this.props.memoListRequest(false, 'old', lastId).then(() => {
+        return this.props.memoListRequest(false, 'old', lastId,null,this.props.currentDate).then(() => {
             // IF IT IS LAST PAGE, NOTIFY
             if(this.props.isLast) {
                 M.toast({html: 'You are reading the last page'});
