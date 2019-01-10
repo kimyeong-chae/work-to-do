@@ -1,0 +1,7 @@
+.jshintrc
+.tern-project
+node_modules
+.env
+.idea/
+build/
+public/bundle.js
