@@ -22,6 +22,7 @@ const initialState = {
     },
     date: {
         currentDate: '',
+        currentDay: ''
     }
 };
 
@@ -140,7 +141,8 @@ export default function memo(state = initialState, action) {
         case types.SET_DATE:
             return update(state, {
                 date: {
-                    currentDate: { $set: action.currentDate}
+                    currentDate: { $set: action.currentDate},
+                    currentDay: { $set: action.currentDay}
                 }
             });
         default:

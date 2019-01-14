@@ -109,6 +109,7 @@ class App extends Component {
                                             handlePrevDate={this.handlePrevDate}
                                             handleNextDate={this.handleNextDate}
                                             date={this.props.currentDate}
+                                            day={this.props.currentDay}
 
                                     />
                 }
@@ -122,7 +123,8 @@ class App extends Component {
 const mapStateToProps = (state) => {
     return {
         status: state.authentication.status,
-        currentDate: state.memo.date.currentDate
+        currentDate: state.memo.date.currentDate,
+        currentDay: state.memo.date.currentDay
     };
 };
 

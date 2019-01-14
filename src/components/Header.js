@@ -48,7 +48,7 @@ class Header extends Component {
                                 </a>
                             </li>
                             <li>
-                                <a style={fontSizeLarge}><Moment format="YYYY. MM. DD">{this.props.date}</Moment></a>
+                                <a style={fontSizeLarge}><Moment format="YYYY. MM. DD">{this.props.date}</Moment> ({this.props.day})</a>
                             </li>
                             <li>
                                 <a style={fontSizeLarge} onClick={this.props.handleNextDate}>

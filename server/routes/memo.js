@@ -183,6 +183,7 @@ router.delete('/:id', (req, res) => {
     READ MEMO: GET /api/memo
 */
 router.get('/', (req, res) => {
+
     Memo.find({"ymd":req.query.ymd, "department": req.session.loginInfo.department})
         .sort({"_id": -1})
         .limit(6)

@@ -16,6 +16,8 @@ import {
 import axios from 'axios';
 import moment from 'moment';
 
+let day_arr = ["일", "월", "화", "수", "목", "금", "토"];
+
 /* MEMO POST */
 export function memoPostRequest(contents, ymd) {
     return (dispatch) => {
@@ -182,17 +184,20 @@ export function initCurrentDate() {
 
     return {
         type: SET_DATE,
-        currentDate: moment(new Date()).format('YYYYMMDD')
+        currentDate: moment(new Date()).format('YYYYMMDD'),
+        currentDay: day_arr[moment(new Date()).day()],
     }
 }
 
 export function prevDate(date) {
     return (dispatch) => {
         let ymd = moment(date).add(-1, 'days').format('YYYYMMDD');
+        let day = day_arr[moment(date).add(-1, 'days').day()];
 
         dispatch({
             type: SET_DATE,
-            currentDate: ymd
+            currentDate: ymd,
+            currentDay: day,
         });
 
         return dispatch(memoListRequest(true, '', '', '', ymd));
@@ -202,10 +207,13 @@ export function prevDate(date) {
 export function nextDate(date) {
     return (dispatch) => {
         let ymd = moment(date).add(1, 'days').format('YYYYMMDD');
+        let day = day_arr[moment(date).add(1, 'days').day()];
 
         dispatch({
             type: SET_DATE,
-            currentDate: ymd
+            currentDate: ymd,
+            currentDay: day,
+
         });
 
         return dispatch(memoListRequest(true, '', '', '', ymd));
